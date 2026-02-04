@@ -1,0 +1,190 @@
+---
+const {
+  title = "Meridian Intelligence Platform — Dubai Edition",
+  description = "Institutional-grade Dubai real estate investment intelligence for UHNW investors, family offices, and institutional buyers.",
+  canonical = "https://dubai.obsidianprivate.capital/",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QJ3PH5VN7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4QJ3PH5VN7');
+    </script>
+
+    <style>
+      * { margin:0; padding:0; box-sizing:border-box; }
+      body{
+        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+        line-height:1.6;
+        color:#1a1a1a;
+        background:#fafafa;
+      }
+      header{
+        background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%);
+        color:white;
+        padding:3rem 5%;
+        text-align:center;
+      }
+      header h1{ font-size:2.6rem; margin-bottom:.5rem; }
+      header p{ font-size:1.15rem; opacity:.9; }
+      .container{ max-width:1200px; margin:0 auto; padding:3rem 5%; }
+
+      .intro{
+        background:white;
+        padding:3rem;
+        border-radius:8px;
+        box-shadow:0 2px 8px rgba(0,0,0,.1);
+        margin-bottom:3rem;
+        text-align:center;
+      }
+      .intro h2{ font-size:2rem; margin-bottom:1rem; }
+      .intro p{
+        font-size:1.05rem;
+        line-height:1.8;
+        color:#444;
+        max-width:900px;
+        margin:0 auto;
+      }
+
+      .nav-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+        gap:2rem;
+        margin-bottom:3rem;
+      }
+      .nav-card{
+        background:white;
+        padding:2.5rem;
+        border-radius:8px;
+        box-shadow:0 2px 8px rgba(0,0,0,.1);
+        transition:transform .2s, box-shadow .2s;
+        text-decoration:none;
+        display:block;
+      }
+      .nav-card:hover{
+        transform:translateY(-4px);
+        box-shadow:0 6px 20px rgba(0,0,0,.15);
+      }
+      .nav-card .icon{
+        font-size:2.5rem;
+        margin-bottom:1rem;
+        display:block;
+      }
+      .nav-card h3{
+        font-size:1.5rem;
+        margin-bottom:.75rem;
+        color:#c9a55a;
+      }
+      .nav-card p{
+        color:#666;
+        font-size:.95rem;
+        line-height:1.6;
+        margin-bottom:1rem;
+      }
+      .nav-card .count{
+        font-size:.85rem;
+        color:#999;
+        font-weight:600;
+      }
+
+      .featured-section{
+        background:white;
+        padding:3rem;
+        border-radius:8px;
+        box-shadow:0 2px 8px rgba(0,0,0,.1);
+        margin-bottom:3rem;
+      }
+      .featured-section h2{
+        font-size:2rem;
+        margin-bottom:2rem;
+        text-align:center;
+      }
+      .featured-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+        gap:2rem;
+      }
+      .featured-card{
+        border-left:4px solid #c9a55a;
+        padding:1.5rem;
+        background:#f8f8f8;
+        border-radius:4px;
+      }
+      .featured-card h3{
+        font-size:1.3rem;
+        margin-bottom:.5rem;
+      }
+      .featured-card p{
+        color:#666;
+        margin-bottom:1rem;
+        font-size:.95rem;
+      }
+      .featured-card a{
+        color:#c9a55a;
+        text-decoration:none;
+        font-weight:600;
+        font-size:.9rem;
+      }
+      .featured-card a:hover{ text-decoration:underline; }
+
+      footer{
+        background:#1a1a1a;
+        color:white;
+        padding:2.5rem 5%;
+        text-align:center;
+      }
+      footer .legal{
+        max-width:980px;
+        margin:0 auto;
+        font-size:.85rem;
+        opacity:.85;
+        line-height:1.7;
+      }
+      footer a{ color:#c9a55a; text-decoration:none; }
+      footer a:hover{ text-decoration:underline; }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Meridian Intelligence Platform — Dubai Edition</h1>
+      <p>Institutional-Grade Dubai Real Estate Intelligence for UHNW Investors & Family Offices</p>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer>
+      <div class="legal">
+        <p><strong>Legal notice & disclaimer</strong></p>
+        <p>
+          This platform is operated by <strong>Clear Strategy Consultancy B.V.</strong><br/>
+          Address: Piet Heinstraat 89b, 2518CD The Hague, The Netherlands<br/>
+          Chamber of Commerce / Registration number: <strong>KVK 90256778</strong>
+        </p>
+        <p>
+          <strong>Obsidian Private Capital</strong> is a registered trade name and the investor-focused main branch of the Meridian platform.<br/>
+          <strong>Meridian Intelligence Platform</strong> is also a registered trade name under Clear Strategy Consultancy B.V.
+        </p>
+        <p>
+          Information is provided for research and informational purposes only and does not constitute legal, tax, or investment advice.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+---
+const { data } = Astro.props;
+if (!data) return;
+---
+
+<script type="application/ld+json">
+  {JSON.stringify(data)}
+</script>

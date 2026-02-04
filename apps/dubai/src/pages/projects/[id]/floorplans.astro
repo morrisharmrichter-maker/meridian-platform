@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({
+    params: { id: p.data.id },
+  }));
+}
+
+const { id } = Astro.params;
+
+const projects = await getCollection("projects");
+const project = projects.find((p) => p.data.id === id);
+
+if (!project) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<html>
+  <head><title>{project.data.title} Floorplans | Meridian Dubai</title></head>
+  <body>
+    <a href={`/projects/${project.data.id}/`}>← Back to Project</a>
+    <h1>{project.data.title} — Floorplans</h1>
+    <p>Floorplans, unit sizes, and downloadable PDFs will be added here.</p>
+  </body>
+</html>

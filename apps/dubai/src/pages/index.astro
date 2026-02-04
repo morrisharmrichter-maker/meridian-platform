@@ -1,12 +1,139 @@
-<html>
-  <head><title>Meridian Dubai Real Estate Intelligence</title></head>
-  <body>
-    <h1>Meridian — Dubai Real Estate Intelligence Index</h1>
-    <p>Structured intelligence for projects, developers, and investment decisions in Dubai.</p>
+---
+import DubaiLayout from "../layouts/DubaiLayout.astro";
+import { getCollection } from "astro:content";
 
-    <ul>
-      <li><a href="/developers/">Dubai Developers</a></li>
-      <li><a href="/projects/">Dubai Projects</a></li>
-    </ul>
-  </body>
-</html>
+const developers = await getCollection("developers");
+const projects = await getCollection("projects");
+
+// Optional placeholders until neighborhoods/assets exist:
+const neighborhoodsCount = 0;
+const assetsCategoriesCount = 0;
+---
+
+<DubaiLayout
+  title="Meridian Intelligence Platform — Dubai Edition"
+  description="Institutional-grade Dubai real estate investment intelligence: developer profiles, project analysis, market reports, and regulatory guides."
+  canonical="https://dubai.obsidianprivate.capital/"
+>
+  <section class="intro">
+    <h2>Dubai Real Estate Investment Intelligence</h2>
+    <p>
+      Comprehensive intelligence for Dubai’s luxury real estate market.
+      Navigate developer profiles, project analysis, market research, and regulatory guidance designed for institutional buyers, family offices, and UHNW investors seeking data-driven allocation strategies in one of the world’s most dynamic property markets.
+    </p>
+  </section>
+
+  <div class="nav-grid">
+    <a href="/developers/" class="nav-card">
+      <span class="icon">🏢</span>
+      <h3>Developers</h3>
+      <p>
+        Profiles of Dubai’s major developers with structured intelligence, flagship projects, and internal linking.
+      </p>
+      <span class="count">{developers.length} Developer Profiles</span>
+    </a>
+
+    <a href="/projects/" class="nav-card">
+      <span class="icon">🏗️</span>
+      <h3>Projects</h3>
+      <p>
+        Investment-driven project pages: coordinates, status, Golden Visa intelligence, and sources.
+      </p>
+      <span class="count">{projects.length} Project Guides</span>
+    </a>
+
+    <a href="/neighborhoods/" class="nav-card">
+      <span class="icon">📍</span>
+      <h3>Neighborhoods</h3>
+      <p>
+        Micro-market intelligence for Dubai’s key districts. (coming soon)
+      </p>
+      <span class="count">{neighborhoodsCount} Neighborhood Guides</span>
+    </a>
+
+    <a href="/intelligence/" class="nav-card">
+      <span class="icon">📊</span>
+      <h3>Intelligence Hub</h3>
+      <p>
+        Market reports, tax/legal guides, government policies, and developer due diligence.
+      </p>
+      <span class="count">Research Categories</span>
+    </a>
+
+    <a href="/assets/" class="nav-card">
+      <span class="icon">📁</span>
+      <h3>Assets Library</h3>
+      <p>
+        Floorplans, brochures, renders, photos, maps, and structured media assets. (coming soon)
+      </p>
+      <span class="count">{assetsCategoriesCount} Asset Categories</span>
+    </a>
+
+    <a href="/projects/mercedes-benz-places-by-binghatti/" class="nav-card">
+      <span class="icon">⭐</span>
+      <h3>Featured Project</h3>
+      <p>
+        Mercedes-Benz Places by Binghatti — flagship branded residence intelligence page.
+      </p>
+      <span class="count">Featured Intelligence</span>
+    </a>
+  </div>
+
+  <section class="featured-section">
+    <h2>Featured Intelligence</h2>
+    <div class="featured-grid">
+      <div class="featured-card">
+        <h3>Market Reports</h3>
+        <p>Quarterly analysis, annual market intelligence, luxury segment deep-dives.</p>
+        <a href="/intelligence/market-reports/">Access Reports →</a>
+      </div>
+
+      <div class="featured-card">
+        <h3>Tax & Legal Guides</h3>
+        <p>Golden Visa, foreign ownership, transaction costs, tax positioning.</p>
+        <a href="/intelligence/tax-guides/">View Guides →</a>
+      </div>
+
+      <div class="featured-card">
+        <h3>Developer Analysis</h3>
+        <p>Due diligence reports on delivery track record, quality, and risk profiles.</p>
+        <a href="/intelligence/developer-analysis/">Read Analysis →</a>
+      </div>
+
+      <div class="featured-card">
+        <h3>Government Policies</h3>
+        <p>DLD, RERA, mortgage caps, escrow rules, planning frameworks.</p>
+        <a href="/intelligence/government-policies/">View Policies →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <h2>Top Developments</h2>
+    <div class="featured-grid">
+      <div class="featured-card">
+        <h3>Downtown Dubai</h3>
+        <p>Ultra-luxury trophy address. Capital preservation + global brand recognition.</p>
+        <a href="/projects/downtown-dubai/">View →</a>
+      </div>
+
+      <div class="featured-card">
+        <h3>Palm Jumeirah</h3>
+        <p>Iconic beachfront market. Scarcity-driven valuation dynamics.</p>
+        <a href="/projects/palm-jumeirah/">View →</a>
+      </div>
+
+      <div class="featured-card">
+        <h3>Dubai Hills Estate</h3>
+        <p>Golf community + family infrastructure with strong resale depth.</p>
+        <a href="/projects/dubai-hills-estate/">View →</a>
+      </div>
+
+      <div class="featured-card">
+        <h3>DAMAC Lagoons</h3>
+        <p>Yield-forward positioning with themed lifestyle product.</p>
+        <a href="/projects/damac-lagoons/">View →</a>
+      </div>
+    </div>
+  </section>
+</DubaiLayout>

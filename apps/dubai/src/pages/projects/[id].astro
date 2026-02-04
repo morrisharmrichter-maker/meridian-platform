@@ -5,7 +5,7 @@ import { AnswerSnippet, InfoBox, Sources } from "@meridian/engine";
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
   return projects.map((p) => ({
-    params: { slug: p.data.id },
+    params: { id: p.data.id },
     props: { project: p },
   }));
 }
@@ -31,6 +31,12 @@ const infoItems = [
 
     <AnswerSnippet snippet={snippet} />
     <InfoBox items={infoItems} />
+
+    <h2>Subpages</h2>
+    <ul>
+      <li><a href={`/projects/${project.data.id}/floorplans/`}>Floorplans</a></li>
+      <li><a href={`/projects/${project.data.id}/investment/`}>Investment</a></li>
+    </ul>
 
     <article><Content /></article>
 

@@ -1,0 +1,137 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { Schema } from "@meridian/engine";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({ params: { id: p.data.id } }));
+}
+
+const { id } = Astro.params;
+
+const projects = await getCollection("projects");
+const project = projects.find((p) => p.data.id === id);
+
+if (!project) return new Response(null, { status: 404 });
+
+const canonical = `https://dubai.obsidianprivate.capital/projects/${project.data.id}/investment/`;
+
+const jsonldResidence = {
+  "@context": "https://schema.org",
+  "@type": "Residence",
+  "name": project.data.title,
+  "description": `${project.data.title} is a Dubai real estate project by ${project.data.developer}.`,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dubai",
+    "addressRegion": project.data.area ?? "Dubai",
+    "addressCountry": "AE"
+  },
+  "developer": {
+    "@type": "Organization",
+    "name": project.data.developer
+  }
+};
+
+const faq = [
+  {
+    "@type": "Question",
+    "name": "Is this project suitable for investment?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "This page provides investment analysis including positioning, expected yield range, and buyer profile. Always verify pricing, supply conditions, and service charges before committing."
+    }
+  }
+];
+
+const jsonldFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq
+};
+---
+
+<BaseLayout
+  title={`${project.data.title} Investment Guide 2026 | Meridian Dubai`}
+  description={`Investment analysis of ${project.data.title}. ROI positioning, buyer profile, and key intelligence for Dubai real estate investors.`}
+  canonical={canonical}
+>
+  <header>
+    <a href={`/projects/${project.data.id}/`}>← Back to Project</a>
+    <h1>{project.data.title}</h1>
+    <p>Investment Intelligence Page</p>
+  </header>
+
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <a href="/projects/">Projects</a> / {project.data.title} / Investment
+    </div>
+
+    <section class="card">
+      <h1>{project.data.title}</h1>
+
+      <div class="meta">
+        <div>
+          <span class="label">Developer</span>
+          <span class="value">{project.data.developer}</span>
+        </div>
+        <div>
+          <span class="label">Location</span>
+          <span class="value">{project.data.area ?? "Dubai"}</span>
+        </div>
+        <div>
+          <span class="label">Golden Visa</span>
+          <span class="value">{project.data.golden_visa_eligible ? "Potentially eligible" : "Not specified"}</span>
+        </div>
+      </div>
+
+      <p><strong>{project.data.title} is a Dubai real estate project by {project.data.developer}.</strong> This page is designed for AEO-first summarization and structured investor intelligence.</p>
+    </section>
+
+    <div class="card">
+      <h2>Investment Overview</h2>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="number">{project.data.status}</span>
+          <span class="label">Status</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">{project.data.area ?? "Dubai"}</span>
+          <span class="label">Area</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">{project.data.golden_visa_eligible ? "Yes" : "—"}</span>
+          <span class="label">Visa signal</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">TBD</span>
+          <span class="label">Yield range</span>
+        </div>
+      </div>
+
+      <h2>Strengths</h2>
+      <ul>
+        <li>Brand positioning and high citation potential</li>
+        <li>Structured AEO content (facts, sections, schema)</li>
+        <li>Internal linking to developer and project subpages</li>
+      </ul>
+
+      <h2>Considerations</h2>
+      <ul>
+        <li>Always verify launch pricing and inventory depth</li>
+        <li>Service charges can materially impact yields</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Obsidian Private Capital. Dubai luxury real estate investment intelligence.</p>
+  </footer>
+
+  <Schema data={jsonldResidence} />
+  <Schema data={jsonldFaq} />
+</BaseLayout>

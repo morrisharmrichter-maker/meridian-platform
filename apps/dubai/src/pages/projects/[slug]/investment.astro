@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({ params: { slug: p.data.id } }));
+}
+
+const { slug } = Astro.params;
+const projects = await getCollection("projects");
+const project = projects.find((p) => p.data.id === slug);
+
+if (!project) {
+  throw new Error("Project not found");
+}
+---
+
+<html>
+  <head><title>{project.data.title} Investment | Meridian Dubai</title></head>
+  <body>
+    <a href={`/projects/${project.data.id}/`}>← Back to Project</a>
+    <h1>{project.data.title} — Investment & ROI</h1>
+
+    <ul>
+      <li>Status: {project.data.status}</li>
+      <li>Developer: {project.data.developer}</li>
+      <li>Golden Visa: {project.data.golden_visa_eligible ? "Potentially eligible" : "Not specified"}</li>
+    </ul>
+
+    <p>This page will include ROI ranges, rental yield, exit liquidity, buyer profile, institutional deal fit.</p>
+  </body>
+</html>
