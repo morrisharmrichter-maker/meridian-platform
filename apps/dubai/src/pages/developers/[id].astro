@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import { AnswerSnippet, InfoBox, Sources } from "@meridian/engine";
+
+export async function getStaticPaths() {
+  const devs = await getCollection("developers");
+  return devs.map((d) => ({
+    params: { id: d.data.id },
+    props: { developer: d },
+  }));
+}
+
+const { developer } = Astro.props;
+const { Content } = await developer.render();
+
+const projects = await getCollection("projects");
+const relatedProjects = projects.filter((p) => p.data.developer === developer.data.id);
+
+const snippet = `${developer.data.title} is a Dubai-based developer. Meridian tracks their flagship projects, locations, and buyer-relevant intelligence.`;
+
+const infoItems = [
+  { label: "Website", value: developer.data.website ?? "N/A" },
+  { label: "Credibility score", value: developer.data.credibility_score ?? "N/A" },
+  { label: "Projects tracked", value: String(relatedProjects.length) },
+];
+---
+
+<html>
+  <head><title>{developer.data.title} | Meridian Dubai</title></head>
+  <body>
+    <a href="/developers/">← All Developers</a>
+    <h1>{developer.data.title}</h1>
+
+    <AnswerSnippet snippet={snippet} />
+    <InfoBox items={infoItems} />
+
+    <article><Content /></article>
+
+    <h2>Projects by {developer.data.title}</h2>
+    <ul>
+      {relatedProjects.map((p) => (
+        <li><a href={`/projects/${p.data.id}/`}>{p.data.title}</a></li>
+      ))}
+    </ul>
+
+    <Sources sources={developer.data.sources} />
+  </body>
+</html>

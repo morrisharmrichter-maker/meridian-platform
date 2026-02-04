@@ -1,0 +1,25 @@
+---
+const { sources = [] } = Astro.props;
+---
+
+<section class="sources">
+  <h3>Sources</h3>
+  {sources.length === 0 ? (
+    <p>No sources added yet.</p>
+  ) : (
+    <ol>
+      {sources.map((s) => (
+        <li>
+          <a href={s.url} target="_blank" rel="nofollow noopener">{s.title}</a>
+        </li>
+      ))}
+    </ol>
+  )}
+</section>
+
+<style>
+.sources{margin:24px 0}
+h3{margin:0 0 10px;font-size:16px}
+ol{padding-left:18px;margin:0}
+li{margin:6px 0}
+</style>

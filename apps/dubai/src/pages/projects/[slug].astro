@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import { AnswerSnippet, InfoBox, Sources } from "@meridian/engine";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({
+    params: { slug: p.data.id },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const snippet = `${project.data.title} is a Dubai real estate project by ${project.data.developer}.`;
+
+const infoItems = [
+  { label: "Developer", value: project.data.developer },
+  { label: "Area", value: project.data.area ?? "Dubai" },
+  { label: "Status", value: project.data.status },
+  { label: "Golden Visa", value: project.data.golden_visa_eligible ? "Potentially eligible" : "Not specified" }
+];
+---
+
+<html>
+  <head><title>{project.data.title} | Meridian Dubai</title></head>
+  <body>
+    <a href="/projects/">← All Projects</a>
+    <h1>{project.data.title}</h1>
+
+    <AnswerSnippet snippet={snippet} />
+    <InfoBox items={infoItems} />
+
+    <article><Content /></article>
+
+    <Sources sources={project.data.sources} />
+  </body>
+</html>

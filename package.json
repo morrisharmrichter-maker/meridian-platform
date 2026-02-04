@@ -1,0 +1,14 @@
+{
+  "name": "meridian-platform",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:meridian": "npm --prefix apps/meridian run dev -- --port 4321",
+    "dev:dubai": "npm --prefix apps/dubai run dev -- --port 4322",
+    "dev:watches": "npm --prefix apps/watches run dev -- --port 4323"
+  }
+}

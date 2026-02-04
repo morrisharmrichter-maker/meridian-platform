@@ -1,0 +1,16 @@
+---
+import { getCollection } from "astro:content";
+const devs = await getCollection("developers");
+---
+
+<html>
+  <head><title>Dubai Developers | Meridian</title></head>
+  <body>
+    <h1>Dubai Developers</h1>
+    <ul>
+      {devs.map((d) => (
+        <li><a href={`/developers/${d.data.id}/`}>{d.data.title}</a></li>
+      ))}
+    </ul>
+  </body>
+</html>

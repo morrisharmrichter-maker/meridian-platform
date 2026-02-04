@@ -1,0 +1,23 @@
+---
+const { items = [] } = Astro.props;
+---
+
+<section class="infobox">
+  <ul>
+    {items.map((it) => (
+      <li>
+        <span class="k">{it.label}</span>
+        <span class="v">{it.value}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+.infobox{border:1px solid #eee;border-radius:14px;padding:14px;margin:16px 0;background:#fff}
+ul{list-style:none;padding:0;margin:0}
+li{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid #f2f2f2}
+li:last-child{border-bottom:none}
+.k{font-weight:600;opacity:.75}
+.v{font-weight:500}
+</style>
